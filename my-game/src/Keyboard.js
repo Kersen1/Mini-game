@@ -33,7 +33,6 @@ export default function Keyboard({ handleClick }) {
         "N",
         "M",
         "DLT",
-
     ]
 
 

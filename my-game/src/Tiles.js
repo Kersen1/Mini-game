@@ -5,15 +5,18 @@ export default function Tiles({length}) {
     console.log(array)
     console.log(length)
     for (let i = 0; i < length; i++) {
-        array.push("x")
+        array.push("")
     }
     console.log(array)
     return (
         <>
-            {array.map(() =>
-                <div className="row">
-                    <div>Y</div>
-                    <div>Y</div>
+            {array.map((index) =>
+                <div className="row"  key={index} >
+                    <div className="column"></div>
+                    <div className="column"></div>
+                    <div className="column"></div>
+                    <div className="column"></div>
+                    <div className="column"></div>
                 </div>
             )}
         </>
