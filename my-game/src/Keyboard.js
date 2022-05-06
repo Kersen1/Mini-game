@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Keyboard() {
+export default function Keyboard({ handleClick }) {
 
     const keys = [
         "Q",
@@ -32,19 +32,17 @@ export default function Keyboard() {
         "B",
         "N",
         "M",
-        "<<",
+        "DLT",
+
     ]
 
-    const handleClick=()=>{
-        console.log(`clicked `)
 
-    }
 
     return (
         <>
             <div className="keyboard-container">
                 {keys.map(key => (
-                    <button key={key}  id={key} onClick={handleClick}>{key}</button>
+                    <button key={key}  id={key} onClick={handleClick(key)}>{key}  </button>
                 ))}
             </div>
         </>

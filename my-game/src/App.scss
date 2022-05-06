@@ -1,53 +1,111 @@
-*,*:before,*:after{
+*, *:before, *:after {
   box-sizing: border-box;
   padding: 0;
-  margin:0;
+  margin: 0;
   font-family: 'Koulen', cursive;
-  color: red;
+  color: gold;
 }
 
 
-.game-container{
-  width:100% ;
-  height:100vh ;
-  background-color:black;
+.game-container {
+  width: 100%;
+  height: 100vh;
+  background-color: black;
   opacity: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.title-container{
+
+.title-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   border-bottom: solid 2px gold;
 }
-.message-container{
+
+.message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.tiles-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.tiles-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.keyboard-container{
+
+.keyboard-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 30px;
 }
-.keyboard-container button{
+
+.keyboard-container button {
   width: 30px;
   height: 30px;
   border-radius: 3px;
-  border:none;
+  border: none;
   background-color: #818384;
   color: white;
   margin: 4px;
 }
 
+.change-length-container {
+  display: flex;
+  width: 45%;
+  margin-bottom: 40px;
+}
+
+.change-length-box {
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  width: 100%;
+  font-size: 0.8em;
+  margin-bottom: 30px;
+}
+
+.change-length-options {
+  width: 50px;
+  color: black;
+}
+.change-length-options option{
+  color: black;
+}
+.game-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.password-box {
+  display: flex;
+flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+#ENTER{
+  width:50px ;
+}
+#DLT{
+width:50px;
+}
+.keyboard-container button{
+  background-color: gold;
+
+  color: black;
+}
+.row{
+  display: flex;
+
+}
