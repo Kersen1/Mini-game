@@ -19,14 +19,19 @@ export default function GameContainer() {
         console.log(`clicked`, key)
         if (key === "ENTER") {
             setState(prevState => {
-                return {
+                return ({
                     ...prevState,
-                    word: [...prevState, key.join("")],
+                    word: [...prevState.word, prevState.key.join("")],
                     key: []
-                }
+                })
             })
-
+            return
         }
+
+        setState(prev => ({
+            ...prev,
+            key: [...prev.key, key]
+        }))
 
     }
 //more to do here
@@ -40,7 +45,7 @@ export default function GameContainer() {
                 <div className="game-box">
 
                     <section className="password-box">
-                        <Tiles length={length}></Tiles>
+                        <Tiles length={length} state={state}></Tiles>
                     </section>
                 </div>
 

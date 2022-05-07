@@ -40,8 +40,8 @@ export default function Keyboard({ handleClick }) {
     return (
         <>
             <div className="keyboard-container">
-                {keys.map(key => (
-                    <button key={key}  id={key} onClick={handleClick(key)}>{key}  </button>
+                {keys.map((key, i) => (
+                    <button key={i}  id={key} onClick={handleClick(key)}>{key}  </button>
                 ))}
             </div>
         </>
