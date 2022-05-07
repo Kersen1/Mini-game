@@ -8,7 +8,7 @@ import Message from "./Message";
 export default function GameContainer() {
     const [state, setState] = useState({
         key: [],
-        word:[],
+        word: [],
     })
 
 
@@ -17,17 +17,19 @@ export default function GameContainer() {
 
     const handleClick = key => () => {
         console.log(`clicked`, key)
-        if (key==="ENTER"){
-            setState(prevState => {return{
-                ...prevState,
-                word: [...prevState,key.join("")],
-                key:[]
-            }})
+        if (key === "ENTER") {
+            setState(prevState => {
+                return {
+                    ...prevState,
+                    word: [...prevState, key.join("")],
+                    key: []
+                }
+            })
 
         }
 
     }
-
+//more to do here
 
     return (
         <>
