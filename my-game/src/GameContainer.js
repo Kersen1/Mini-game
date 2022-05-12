@@ -13,11 +13,12 @@ export default function GameContainer() {
 
 
     const [length, setLength] = useState(5)
-
+    const [message,changeMessage] = useState("INITIAL MESSAGE")
+console.log(message)
 
     const handleClick = key => () => {
         console.log(`clicked`, key)
-        if (key === "ENTER") {
+        if (key === "ENTER" && state.key.length===5) {
             setState(prevState => {
                 return ({
                     ...prevState,
@@ -25,7 +26,13 @@ export default function GameContainer() {
                     key: []
                 })
             })
-            return
+            return;
+        }
+        else if (key==="ENTER" && state.key.length !== 5){
+            console.log("za krotkie slowo")
+
+            changeMessage("Word is too short")
+            return;
         }
 
         setState(prev => ({
@@ -41,7 +48,7 @@ export default function GameContainer() {
             <div className="game-container">
                 <Title></Title>
 
-                <Message></Message>
+                <Message message={message}></Message>
                 <div className="game-box">
 
                     <section className="password-box">
