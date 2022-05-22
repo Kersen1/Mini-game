@@ -8,7 +8,7 @@ export default function Tiles({length, state}) {
     const getColumn = (el) => {
         const result = [];
         for (let i = 0; i < lengthOfRows; i++) {
-            result.push(<div key={i} className="column">{el[i] || ""}</div>)
+            result.push(<div key={i}  className="column">{el[i] || ""}</div>)
         }
 
         return result
