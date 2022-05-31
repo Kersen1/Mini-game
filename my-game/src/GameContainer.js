@@ -20,58 +20,77 @@ export default function GameContainer() {
     const [isVisibleStart, changeVisibilityOfStart] = useState({
         visibility: "visible"
     })
-
+    const [hasWon, changeIfGameOver] = useState(false)
+    const [line, changeLine] = useState(1)
     const guessWord = "words"
-    let changedToSting = state.key.toString().toLowerCase().replaceAll(',', '')
-
+    const getIt = guessWord.toUpperCase().split('')
+    /*let changedToSting = state.key.toString().toLowerCase().replaceAll(',', '')*/
+    console.log(guessWord.toUpperCase().split(''))
 
     const handleClick = key => () => {
-        console.log(`clicked`, key)
-        if (key === "ENTER" && state.key.length === 5) {
-            setState(prevState => {
-                return ({
-                    ...prevState,
-                    word: [...prevState.word, prevState.key.join("")],
-                    key: []
+        if (hasWon === true) {
+            return;
+        } else {
+            console.log(`clicked`, key)
+            if (key === "ENTER" && state.key.length === 5) {
+                setState(prevState => {
+                    return ({
+                        ...prevState,
+                        word: [...prevState.word, prevState.key.join("")],
+                        key: []
+                    })
                 })
-            })
-            if (guessWord === changedToSting) {
-                console.log(guessWord, changedToSting)
-                console.log("WYGRANA")
-                changeMessage("You've won")
+
+                /*if (guessWord === changedToSting) {
+                    console.log(guessWord, changedToSting)
+                    console.log("WYGRANA")
+                    changeMessage("You've won")
+                    changeIfGameOver(true)*/
 
 
-                    document.querySelector("#root > div > div.game-box > section > div:nth-child(2) > div:nth-child(1)").style.backgroundColor ='green'
+                for (let i = 0; i <= 4; i++) {
+                    if (getIt[i] === state.key[i]) {
+                        document.querySelector(`#root > div > div.game-box > section > div:nth-child(${line}) > div:nth-child(${i+1})`).style.backgroundColor = 'green'
+                    } else if ((getIt[i] !== state.key[i]) && (getIt.includes(state.key[i]) === true)) {
+                        document.querySelector(`#root > div > div.game-box > section > div:nth-child(${line}) > div:nth-child(${i+1})`).style.backgroundColor = 'yellow'
 
+                    } else if ((getIt[i] !== state.key[i]) && (getIt.includes(state.key[i]) !== true)){
+                        document.querySelector(`#root > div > div.game-box > section > div:nth-child(${line}) > div:nth-child(${i+1})`).style.backgroundColor = 'red'
+                    }
+                        }
+
+                /*}*/
+                changeLine(prev => prev + 1)
+
+                return;
+            } else if (key === "ENTER" && state.key.length < 5) {
+                console.log("word is too short")
+                changeMessage("Word is too short")
+                return;
+            } else if (state.key.length > 5) {
+                console.log("Word is too long")
+                changeMessage("Word is too long")
+                return;
+            } else if (state.key.length < 5 && key !== "DLT") {
+                setState(prev => ({
+                    ...prev,
+                    key: [...prev.key, key]
+                }))
+            } else if (key === "DLT") {
+                setState(prevState => {
+                    return ({
+                        ...prevState,
+                        key: [...prevState.key].slice(0, -1)
+                    })
+                })
+
+                return;
             }
+            console.log(state.key)
 
-            return;
-        } else if (key === "ENTER" && state.key.length < 5) {
-            console.log("word is too short")
-            changeMessage("Word is too short")
-            return;
-        } else if (state.key.length > 5) {
-            console.log("Word is too long")
-            changeMessage("Word is too long")
-            return;
-        } else if (state.key.length < 5 && key !== "DLT") {
-            setState(prev => ({
-                ...prev,
-                key: [...prev.key, key]
-            }))
-        } else if (key === "DLT") {
-            setState(prevState => {
-                return ({
-                    ...prevState,
-                    key: [...prevState.key].slice(0, -1)
-                })
-            })
-
-            return;
         }
-        console.log(state.key)
-
     }
+
 
 
     const handleStart = () => {
