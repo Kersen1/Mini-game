@@ -3,6 +3,7 @@ import Tiles from "./Tiles";
 import Title from "./Title"
 import Keyboard from "./Keyboard";
 import Message from "./Message";
+import Rules from "./Rules";
 
 
 export default function GameContainer() {
@@ -11,28 +12,94 @@ export default function GameContainer() {
         word: [],
     })
     const [length, setLength] = useState(3)
+
     const [message, changeMessage] = useState("USE ONLY EXISTING WORDS")
-    const [isVisibleTiles, changeVisibilityOfTiles] = useState({
+
+   const [isVisibleTiles, changeVisibilityOfTiles] = useState({
         visibility: "hidden",
         width: "0px",
         height: "0px"
     })
+
     const [isVisibleStart, changeVisibilityOfStart] = useState({
         visibility: "visible"
     })
-    const [hasWon, changeIfGameOver] = useState(false)
+
+    const [gameOver, changeIfGameOver] = useState(true)
+
     const [line, changeLine] = useState(1)
-    const guessWord = "words"
+
+    const [guessWord,changeGuessWord] =useState("words")
+
+
+
     const getIt = guessWord.toUpperCase().split('')
-    /*let changedToSting = state.key.toString().toLowerCase().replaceAll(',', '')*/
+
+
+    let changedToSting = state.key.toString().toLowerCase().replaceAll(',', '')
+
+
+
     console.log(guessWord.toUpperCase().split(''))
 
+
+    const guessWordArray= [
+        "price",
+        "hired",
+        "blast",
+        "sweat",
+        "reuse",
+        "haste",
+        "admit",
+        "trees",
+        "slump",
+        "title",
+        "going",
+        "front",
+        "brawl",
+        "sweat",
+        "grand",
+        "taunt",
+        "bears",
+        "piano",
+        "shirt",
+        "crawl",
+        "smell",
+        "mouse",
+        "owned",
+        "break",
+        "block",
+        "lobby",
+        "haste",
+        "share",
+        "wager",
+        "after",
+        "early",
+        "woods",
+        "pouch",
+        "toast",
+        "visit",
+        "suave",
+        "cower",
+        "bread",
+        "scary",
+        "words"
+    ]
+
+    const wordGenerator =function getRndInteger(min, max) {
+        return ( guessWordArray[(Math.floor(Math.random() * (max - min) ) + min)])
+    }
+
+
+
     const handleClick = key => () => {
-        if (hasWon === true) {
+        if (gameOver === true) {
             return;
         } else {
             console.log(`clicked`, key)
             if (key === "ENTER" && state.key.length === 5) {
+                if (state.word.length !== length-1) {
+
                 setState(prevState => {
                     return ({
                         ...prevState,
@@ -40,13 +107,15 @@ export default function GameContainer() {
                         key: []
                     })
                 })
+            }
 
-                /*if (guessWord === changedToSting) {
-                    console.log(guessWord, changedToSting)
-                    console.log("WYGRANA")
+                if (guessWord === changedToSting) {
                     changeMessage("You've won")
-                    changeIfGameOver(true)*/
-
+                    changeIfGameOver(true)
+                }
+                if (guessWord!==changedToSting && state.word.length===length-1){
+                    changeMessage("Better Luck Next Time!")
+                }
 
                 for (let i = 0; i <= 4; i++) {
                     if (getIt[i] === state.key[i]) {
@@ -58,25 +127,32 @@ export default function GameContainer() {
                         document.querySelector(`#root > div > div.game-box > section > div:nth-child(${line}) > div:nth-child(${i+1})`).style.backgroundColor = 'red'
                     }
                         }
+                if (state.word.length === length-1 && state.key.length===5){
+                    changeIfGameOver(true);
+                }
 
                 /*}*/
                 changeLine(prev => prev + 1)
 
                 return;
-            } else if (key === "ENTER" && state.key.length < 5) {
+            }
+            else if (key === "ENTER" && state.key.length < 5) {
                 console.log("word is too short")
                 changeMessage("Word is too short")
                 return;
-            } else if (state.key.length > 5) {
+            }
+            else if (state.key.length > 5) {
                 console.log("Word is too long")
                 changeMessage("Word is too long")
                 return;
-            } else if (state.key.length < 5 && key !== "DLT") {
+            }
+            else if (state.key.length < 5 && key !== "DLT") {
                 setState(prev => ({
                     ...prev,
                     key: [...prev.key, key]
                 }))
-            } else if (key === "DLT") {
+            }
+            else if (key === "DLT") {
                 setState(prevState => {
                     return ({
                         ...prevState,
@@ -111,10 +187,12 @@ export default function GameContainer() {
                 height: "0px",
             })
         })
+        changeGuessWord(wordGenerator(1,39))
+      console.log(guessWord)
+        changeIfGameOver(false)
         changeMessage("Good Luck!")
     }
 
-//more to do here
 
     return (
         <>
@@ -146,6 +224,7 @@ export default function GameContainer() {
                         </select>
                     </div>
                 </form>
+                <Rules></Rules>
 
             </div>
         </>
